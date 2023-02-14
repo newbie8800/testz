@@ -1,0 +1,31 @@
+<script>
+
+    function myFunction() {
+      document.getElementById("demo").innerHTML = "Hello World";
+  
+      document.getElementById("val1").innerHTML = "foobar";
+      document.getElementById("val1").value = "foobar";
+    }
+  
+    const lis = document.getElementById('users').getElementsByTagName('li');
+  
+    setInterval(myTimer, 1000);
+  
+    function myTimer() {
+  
+      for (var i = 0; i < lis.length; i++) (function (i) {
+        lis[i].onclick = function () {
+  
+          // do something
+         // alert(lis[i].innerHTML);
+          // if (lis[i]) {
+          //   (lis[i]) = document.getElementById("myPop2").style.display = "block";
+          // }
+          document.getElementById("val1").innerHTML = lis[i].innerHTML ;
+      document.getElementById("val1").value = lis[i].innerHTML ;
+        }
+      })(i);
+  
+    }//timer
+  
+  </script>

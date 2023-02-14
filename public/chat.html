@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+    integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/style.css">
+  <title>ChatCord App</title>
+</head>
+
+<body>
+  <div class="chat-container">
+    <header class="chat-header">
+      <h1><i class="fas fa-smile"></i> ChatCord</h1>
+      <a href="index.html" class="btn">Leave Room</a>
+    </header>
+
+
+    <main class="chat-main">
+      <div class="chat-sidebar">
+        <h3><i class="fas fa-comments"></i> Room Name:</h3>
+        <h2 id="room-name"></h2>
+        <h3><i class="fas fa-users"></i> Users</h3>
+        <ul id="users">
+          <!-- <li>Brad</li>
+          <li>John</li>
+          <li>Mary</li>
+          <li>Paul</li>
+          <li>Mike</li> -->
+        </ul>
+      </div>
+      <div class="chat-messages">
+        <!-- <div class="message">
+						<p class="meta">Brad <span>9:12pm</span></p>
+						<p class="text">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+							repudiandae.
+						</p>
+					</div>
+					<div class="message">
+						<p class="meta">Mary <span>9:15pm</span></p>
+						<p class="text">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+							repudiandae.
+						</p>
+					</div> -->
+      </div>
+    </main>
+
+
+
+
+    <div class="chat-form-container">
+      <form id="chat-form">
+        <input id="msg" type="text" placeholder="Enter Message" required autocomplete="off" />
+        <button class="btn"><i class="fas fa-paper-plane"></i> Send</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="join-container">
+    <header class="join-header">
+      <h1><i class="fas fa-smile"></i> ChatCord</h1>
+    </header>
+    <main class="join-main">
+
+      <form action="chat.html">
+        <div class="form-control">
+          <label for="username">Username</label>
+          <!-- <input type="text" name="username" id="username" placeholder="Enter username..." required /> -->
+          <input type="text" name="username" id="username" />
+        </div>
+        <div class="form-control">
+          <label for="room">Room</label>
+          <select name="room" id="room">
+            <option id="optidz" value="JavaScript">JavaScript</option>
+            <option value="Python">Python</option>
+            <option value="johnPRIVATE1">johnPRIVATE1</option>
+            <option value="PHP">PHP</option>
+            <option value="C#">C#</option>
+            <option value="Ruby">Ruby</option>
+            <option value="Java">Java</option>
+          </select>
+        </div>
+        <button type="submit" class="btn" onclick="joinz()">Join Chat</button>
+      </form>
+
+      <br>
+
+
+
+    </main>
+
+
+    <!-- <form id="saveForm" action="chat.html/save" method="post"></form>
+    <form id="deleteForm" action="chat.html/delete" method="post"></form>
+
+    <div id="toolbar">
+      <input type="text" name="foo" form="saveForm" />
+      <input type="hidden" value="some_id" form="deleteForm" />
+      <input type="text" name="foo2" id="foo2" form="saveForm" value="success" />
+
+      <input type="submit" name="save" value="Save" form="saveForm"
+        onclick="alert(document.getElementById('deleteForm').elements.length + ' ' + document.getElementById('saveForm').elements.length + ' ' + document.getElementById('saveForm').elements['foo2'].value);" />
+      <input type="submit" name="delete" value="Delete" form="deleteForm" />
+      <a href="/home/index">Cancel</a>
+    </div> -->
+  </div>
+
+  <!-- ----------------------------- -->
+
+
+  <main class="chat-maintwo">
+    <div class="chat-sidebar">
+      <h3><i class="fas fa-comments"></i> Room Name:</h3>
+      <h2 id="room-name2"></h2>
+      <h3><i class="fas fa-users"></i> Users</h3>
+      <ul id="users">
+
+      </ul>
+    </div>
+    <div class="chat-messages">
+
+    </div>
+  </main>
+
+
+
+
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.2/qs.min.js"
+    integrity="sha512-ErYZLDi4WRoox2JhOIADWBydTRhMJ0KIXnv5C1GvuY8YooLGapnebaM3iRGhwS6/E9ONXj0MRXp6bhu73sdFkg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
+<script>
+
+  const lis = document.getElementById('users').getElementsByTagName('li');
+
+
+
+  var count = 0;
+
+  var theurl = document.URL
+
+const last = theurl.charAt(theurl.length - 1);
+const checklast = theurl.indexOf(theurl.length - 1);
+
+
+// if (count === NaN) {
+//         const cnt = Number(last) + 1
+// count = cnt
+//     }
+
+//count = 0
+if (isNaN(last)){
+count = 1
+}else{
+  const cnt = Number(last) + 1
+count = cnt
+}
+
+
+
+
+
+
+
+
+
+  setInterval(myTimer, 1000);
+
+  function myTimer() {
+
+    // var number = document.getElementById("btnTst");
+
+    // number.innerHTML = count;
+
+    for (var i = 0; i < lis.length; i++) (function (i) {
+      lis[i].onclick = function () {
+
+        //count=1//this to start count//still not working
+        // if(isNaN(parseFloat("count"))){
+        //   count=1
+        // }else{
+        //   count+=1
+        // }
+        
+
+        document.getElementById("optidz").value = lis[i].innerHTML + 'PRIVATE' + count;
+        document.getElementById("optidz").innerHTML = lis[i].innerText + 'PRIVATE' + count;
+
+        document.getElementById("username").value = lis[i].innerText;
+        //------------------------------------------------------
+
+        // alert(lis[i].innerText)
+
+        // var thediv = document.createElement("div");
+        // var theparent1 = document.querySelector('.chat-main')
+        // var thedivid = document.createElement("h2");
+
+        // thediv.setAttribute("class", 'chat-sidebar3');
+
+        // thediv.innerHTML = `<div style="position: absolute;top: 0px;left: 0px;background-color: red; color: #fff; padding: 20px 160px 60px;overflow-y: scroll;">` + "bla" + `</div>`;
+
+        // theparent1.appendChild(thediv);
+
+
+      }
+    })(i);
+
+
+
+  }//timer
+  //--------------------------------------------------------------------------------- 2
+
+  if (document.URL.indexOf("PRIVATE" + count) != -1) {//if this is private
+
+    var theurl = document.URL
+
+  
+
+    const last = theurl.charAt(theurl.length - 1);
+   // console.log(last);
+
+  //  if (last>=0){
+  //    last+=1
+  //  }
+  const cnt = Number(last) + 1
+  count = cnt
+
+ var thedit = theurl.innerText
+
+    var thediv = document.createElement("div");
+    var theparent1 = document.querySelector('.chat-maintwo')
+    var thedivid = document.createElement("h2");
+
+    thediv.setAttribute("class", 'chat-sidebar3');
+
+    thediv.innerHTML = `<div style="top: 0px;left: 0px;background-color: red; color: #fff; padding: 20px 20px 60px;overflow-y: scroll;">` + theurl + `</div>`;
+
+    theparent1.appendChild(thediv);
+  }
+
+  //----------------------------------------------------------------------------
+
+  function joinz() {
+
+
+
+    var thediv = document.createElement("div");
+    var theparent1 = document.querySelector('.chat-main')
+    var thedivid = document.createElement("h2");
+
+    thediv.setAttribute("class", 'chat-sidebar3');
+
+    thediv.innerHTML = `<div style="position: absolute;top: 0px;left: 0px;background-color: red; color: #fff; padding: 20px 160px 60px;overflow-y: scroll;">` + "blah" + `</div>`;
+
+    theparent1.appendChild(thediv);
+
+  }
+
+</script>
